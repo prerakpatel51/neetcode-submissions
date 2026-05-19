@@ -1,0 +1,24 @@
+class Solution:
+
+    def encode(self, strs: List[str]) -> str:
+        result=""
+        for i in strs:
+            result=result + str(len(i)) + "#" + i
+        print(result)
+        return result
+    def decode(self, s: str) -> List[str]:
+        result=[]
+        i=0
+
+        while i<len(s):
+            j=i
+            while s[j]!="#":
+                j+=1
+            length=s[i:j]
+            if length=="":
+                length=0
+            else:
+                length=int(length)
+            result.append(s[j+1:j+1+length])
+            i=j+1+length
+        return result  
