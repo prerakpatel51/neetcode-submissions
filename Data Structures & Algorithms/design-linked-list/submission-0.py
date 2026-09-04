@@ -1,0 +1,58 @@
+class ListNode:
+    def __init__(self,val,next=None):
+        self.val=val
+        self.next=next
+class MyLinkedList:
+
+    def __init__(self):
+        self.dummy = ListNode(-1)
+
+    def get(self, index: int) -> int:
+        curr = self.dummy.next
+        i = 0
+        while curr:
+            if i == index:
+                return curr.val
+            curr = curr.next
+            i += 1
+        return -1
+
+    def addAtHead(self, val: int) -> None:
+        self.addAtIndex(0, val)
+
+    def addAtTail(self, val: int) -> None:
+        curr = self.dummy
+        while curr.next:
+            curr = curr.next
+        curr.next = ListNode(val)
+
+    def addAtIndex(self, index: int, val: int) -> None:
+        if index < 0:
+            index = 0
+        curr = self.dummy
+        for _ in range(index):
+            if not curr:
+                return
+            curr = curr.next
+        if curr:
+            new_node = ListNode(val, curr.next)
+            curr.next = new_node
+
+    def deleteAtIndex(self, index: int) -> None:
+        if index < 0:
+            return
+        curr = self.dummy
+        for _ in range(index):
+            if not curr:
+                return
+            curr = curr.next
+        if curr and curr.next:
+            curr.next = curr.next.next
+
+# Your MyLinkedList object will be instantiated and called as such:
+# obj = MyLinkedList()
+# param_1 = obj.get(index)
+# obj.addAtHead(val)
+# obj.addAtTail(val)
+# obj.addAtIndex(index,val)
+# obj.deleteAtIndex(index)
